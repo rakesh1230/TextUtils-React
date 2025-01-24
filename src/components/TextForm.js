@@ -38,20 +38,20 @@ export default function TextForm(props) {
         <>
         <div className="container" style={{color: props.mode==="dark" ? 'white': 'black'}}>
             <div className="mb-3">
-            <h1>{props.title}</h1>
-            <textarea className="form-control my-2" style={{backgroundColor: props.mode==="dark" ? 'grey': 'white', color:props.mode==="dark" ? 'white': 'black'}} value={text} id="myBox" rows="8" onChange={handleonChange}></textarea>
-            <button className="btn btn-primary mx-2" onClick={handleUpcase}>Convert to Uppercase</button>
-            <button className="btn btn-primary mx-2" onClick={handlelowercase}>Convert to Lowercase</button>
-            <button className="btn btn-primary mx-2" onClick={clearText}>Clear</button>
-            <button className="btn btn-primary mx-2" onClick={CopyText}>Copy to clipboard</button>
+            <h1 className="mb-4">{props.title}</h1>
+            <textarea className="form-control my-2" style={{backgroundColor: props.mode==="dark" ? '#1e2773': 'white', color:props.mode==="dark" ? 'white': 'black'}} value={text} id="myBox" rows="8" onChange={handleonChange}></textarea>
+            <button disabled={text.split(" ").filter((element)=> {return element.length !==0}).length === 0} className="btn btn-primary mx-1 my-1" onClick={handleUpcase}>Convert to Uppercase</button>
+            <button disabled={text.split(" ").filter((element)=> {return element.length !==0}).length === 0} className="btn btn-primary mx-1 my-1" onClick={handlelowercase}>Convert to Lowercase</button>
+            <button disabled={text.split(" ").filter((element)=> {return element.length !==0}).length === 0} className="btn btn-primary mx-1 my-1" onClick={CopyText}>Copy to clipboard</button>
+            <button disabled={text.split(" ").filter((element)=> {return element.length !==0}).length === 0} className="btn btn-danger mx-1 my-1" onClick={clearText}>Clear</button>
             </div>
         </div>
         <div className="container my-3" style={{color: props.mode==="dark" ? 'white': 'black'}}>
             <h2>Your Text Summary</h2>
-            <p><b>{text.trim() === "" ? 0:text.trim().split(/\s+/).length} word and {text.length} characters</b></p>
-            <p><b>{text.trim() === ""?0: 0.008 * text.split(" ").length } Minutes read</b></p>
+            <p><b>{ text.split(/\s/).filter((element)=> {return element.length !==0}).length } word and {text.length} characters</b></p>
+            <p><b>{ 0.008 * text.split(" ").filter((element)=> {return element.length !== 0}).length} Minutes read</b></p>
             <h2>Preview</h2>
-            <p>{text.length >0? text:'Enter something in the text box above to preview it here'}</p>
+            <p>{text.length >0? text:'Nothing to preview!'}</p>
             <p><b>{extractEmail()}</b></p>
         </div>
         </>
